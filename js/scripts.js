@@ -1,33 +1,44 @@
-//business logic
-function Contact(first, last) {
-  this.firstName = first;
-  this.lastName = last;
+//Business Logic
+function Location(country, city, landmark, time, notes) {
+  this.Country = country;
+  this.City = city;
+  this.Landmark = landmark;
+  this.Time = time;
+  this.Notes = notes;
 }
 
-Contact.prototype.fullName = function() {
-  return this.firstName + " " + this.lastName;
+Location.prototype.destination = function() {
+  return this.Country + " " + this.City;
 }
 
-// user interface logic
+
+
+//User interface Logic
 $(document).ready(function() {
-  $("form#new-contact").submit(function(event) {
+  $("#places-visited").submit(function(event) {
     event.preventDefault();
 
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
+    var countryName = $("input#country").val();
+    var cityName = $("input#city").val();
+    var landmarkName = $("input#landmark").val();
+    var timeName = $("input#time").val();
+    var notesName = $("input#notes").val();
 
-    var newContact = new Contact(inputtedFirstName, inputtedLastName);
+    var newLocation = new Location(countryName, cityName, landmarkName, timeName, notesName);
+    console.log(newLocation);
 
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
+    $("ul#locations").append("<li><span class='location'>" + newLocation.destination() +"</span></li>");
 
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-
-    $(".contact").last().click(function() {
-      $("#show-contact").show();
-      $("#show-contact h2").text(newContact.firstName);
-      $(".first-name").text(newContact.firstName);
-      $(".last-name").text(newContact.lastName);
+    $(".location").last().click(function() {
+      $("#show-location").show();
+      $(".country").text(newLocation.Country);
+      $(".city").text(newLocation.City);
+      $(".landmark").text(newLocation.Landmark);
+      $(".time").text(newLocation.Time);
+      $(".notes").text(newLocation.Notes);
     });
+
   });
+
+
 });
