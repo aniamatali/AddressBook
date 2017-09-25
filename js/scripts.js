@@ -12,7 +12,6 @@ Location.prototype.destination = function() {
 }
 
 
-
 //User interface Logic
 $(document).ready(function() {
   $("#places-visited").submit(function(event) {
@@ -27,7 +26,8 @@ $(document).ready(function() {
     var newLocation = new Location(countryName, cityName, landmarkName, timeName, notesName);
     console.log(newLocation);
 
-    $("ul#locations").append("<li><span class='location'>" + newLocation.destination() +"</span></li>");
+    $("ul#locations").append("<li><span class='location'>"  + newLocation.destination() +"</span></li>");
+// <input type='checkbox' name='destination' value='"+ newLocation.Country +"'>"
 
     $(".location").last().click(function() {
       $("#show-location").show();
@@ -42,5 +42,17 @@ $(document).ready(function() {
       $("input#landmark").val("");
       $("input#notes").val("");
       $("input#time").val("");
+
+      $("p").click(function() {
+      $(this).hide();
+    });
+
+      $("#remove").click(function() {
+        $("input:checkbox[name=destination]:checked").each(function() {
+          var destinationName = $(this).val();
+          newLocation(destinationName).remove();
+        });
+      });
+
   });
 });
