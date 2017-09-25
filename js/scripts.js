@@ -37,8 +37,10 @@ $(document).ready(function() {
       $(".time").text(newLocation.Time);
       $(".notes").text(newLocation.Notes);
     });
-
+      $("input#country").val("");
+      $("input#city").val("");
+      $("input#landmark").val("");
+      $("input#notes").val("");
+      $("input#time").val("");
   });
-
-
 });
