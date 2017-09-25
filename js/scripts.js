@@ -7,6 +7,7 @@ function Location(country, city, landmark, time, notes) {
   this.Notes = notes;
 }
 
+
 Location.prototype.destination = function() {
   return this.Country + " " + this.City;
 }
@@ -14,6 +15,7 @@ Location.prototype.destination = function() {
 
 //User interface Logic
 $(document).ready(function() {
+
   $("#places-visited").submit(function(event) {
     event.preventDefault();
 
@@ -24,10 +26,8 @@ $(document).ready(function() {
     var notesName = $("input#notes").val();
 
     var newLocation = new Location(countryName, cityName, landmarkName, timeName, notesName);
-    console.log(newLocation);
 
-    $("ul#locations").append("<li><span class='location'>"  + newLocation.destination() +"</span></li>");
-// <input type='checkbox' name='destination' value='"+ newLocation.Country +"'>"
+    $("ul#locations").append("<li><span class='location'> <input type='checkbox' name='destination' id='" + newLocation.Country+ "' value='"+ newLocation.Country +"'>" + newLocation.destination() + "</span></li>");
 
     $(".location").last().click(function() {
       $("#show-location").show();
@@ -44,15 +44,15 @@ $(document).ready(function() {
       $("input#time").val("");
 
       $("p").click(function() {
-      $(this).hide();
-    });
-
-      $("#remove").click(function() {
-        $("input:checkbox[name=destination]:checked").each(function() {
-          var destinationName = $(this).val();
-          newLocation(destinationName).remove();
-        });
+        $(this).hide();
       });
 
+
+  });
+  $("#remove").click(function() {
+    $("input:checkbox[name=destination]:checked").each(function() {
+      $("#show-location").hide();
+      $(this).parent().parent().remove();
+    });
   });
 });
